@@ -1,0 +1,11 @@
+FROM debian:sid
+MAINTAINER Eric Crosson <ecrosson@shoretel.com>
+
+RUN apt-get update && apt-get install -y clang-format-3.8 && \
+    ln -s $(which clang-format-3.8) /usr/bin/clang-format
+
+# switch to uid/gid identical to host uid/gid (forks/users), if not doing this, files that
+# clang-format written will change user and group all to root.
+USER 1000:100
+
+ENTRYPOINT []
