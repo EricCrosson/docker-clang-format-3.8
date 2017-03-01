@@ -1,6 +1,7 @@
 FROM debian:sid
 MAINTAINER Eric Crosson <ecrosson@shoretel.com>
 
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
 apt-get install -y --no-install-recommends clang-format-3.8=1:3.8.1-17 && \
 apt-get clean && rm -rf /var/lib/apt/lists/* && \
