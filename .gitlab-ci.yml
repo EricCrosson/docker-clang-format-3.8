@@ -1,0 +1,19 @@
+---
+stages:
+  - lint
+  - build
+
+services:
+  - docker:dind
+
+docker_lint:
+  stage: lint
+  image: lukasmartinelli/hadolint
+  script:
+    - hadolint --ignore DL3008 Dockerfile
+
+docker_build:
+  stage: build
+  image: docker:latest
+  script:
+    - docker build -t ecrosson/clang-format-3.8 .
