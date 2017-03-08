@@ -6,6 +6,13 @@ stages:
 services:
   - docker:dind
 
+
+shellcheck:
+  stage: lint
+  image: ecrosson/shellcheck
+  script:
+    - shellcheck bin/*
+
 docker_lint:
   stage: lint
   image: lukasmartinelli/hadolint
