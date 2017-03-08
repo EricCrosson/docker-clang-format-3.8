@@ -6,6 +6,7 @@
 # arguments could be formatted differently by clang-format.
 
 set -o nounset
+# [ "${CI_SERVER:-}" = "yes" ] && set -x
 
 clang-format -style=file \
              --assume-filename=.clang-format \
@@ -15,9 +16,19 @@ clang-format -style=file \
 rc=$?
 
 if [ ${rc} -eq 0 ]; then
-    cat <<-"EOF"
-    Code does not adhere to formatting standards.
-    Please run the post-clone hook like so: `./hooks/post-clone`.
+    cat <<"EOF"
+Code does not adhere to formatting standards.
+Please run the post-clone hook like so: `./hooks/post-clone`.
+
+The following files are formatted improperly:
 EOF
+    for file in "$@"; do
+        clang-format -style=file \
+                     --assume-filename=.clang-format \
+                     -output-replacements-xml \
+                     "${file}" 2>/dev/null \
+            | grep -c "<replacement " >/dev/null \
+            && echo "${file}"
+    done
     exit 1
 fi
