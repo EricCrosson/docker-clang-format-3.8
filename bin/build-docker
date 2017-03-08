@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+# Written by Eric Crosson
+# 2017-03-02
+#
+# Build the docker container provided by this project.
+
+set -o nounset
+[ "${CI_SERVER:-}" = "yes" ] && set -x
+
+image='ecrosson/clang-format-3.8'
+
+root="$(readlink -f "$(dirname "$0")" | sed -r 's/\/bin.*//')"
+version="$(cat "${root}/version")"
+release_date="$(date +%Y-%m-%d:%H:%M)"
+
+cd "$(readlink -f "$(dirname "$0")/..")" || exit -1
+
+docker build \
+       -t "${image}:${version}" \
+       --build-arg VERSION="${version}" \
+       --build-arg RELEASE_DATE="${release_date}" \
+       .
