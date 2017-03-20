@@ -1,5 +1,7 @@
 Overview
 ========
 
-This repository contains the version of clang-format we use to standardize the
-qseries line of code.
+This project provides a docker image containing ``clang-format-3.8``
+and a custom script called ``check-formatting``, useful in a ci-context.
+
+TODO: beef up this readme, provide examples, convert to markdown

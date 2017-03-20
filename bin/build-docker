@@ -7,16 +7,15 @@
 set -o nounset
 [ "${CI_SERVER:-}" = "yes" ] && set -x
 
-image='ecrosson/clang-format-3.8'
-
 root="$(readlink -f "$(dirname "$0")" | sed -r 's/\/bin.*//')"
+tag="$(cat "${root}/tag")"
 version="$(cat "${root}/version")"
 release_date="$(date +%Y-%m-%d:%H:%M)"
 
-cd "$(readlink -f "$(dirname "$0")/..")" || exit -1
+cd "${root}" || exit -1
 
 docker build \
-       -t "${image}:${version}" \
+       -t "${tag}:${version}" \
        --build-arg VERSION="${version}" \
        --build-arg RELEASE_DATE="${release_date}" \
        .
