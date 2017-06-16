@@ -1,4 +1,4 @@
-# docker-clang-format-3.8 [![Usable](https://img.shields.io/badge/is-usable-8e74b2.svg)](https://github.com/ericcrosson/usable)
+# docker-clang-format-3.8 [![Docker Pulls](https://img.shields.io/docker/pulls/hamroctopus/clang-format-3.8.svg)](https://hub.docker.com/r/hamroctopus/clang-format-3.8/)
 
 > Docker environment for running clang-format
 
