@@ -6,6 +6,7 @@
 # arguments could be formatted differently by clang-format.
 
 set -o nounset
+errorMessage="${FMT_ERROR_MSG:-}"
 # [ "${CI_SERVER:-}" = "yes" ] && set -x
 
 clang-format -style=file \
@@ -16,9 +17,9 @@ clang-format -style=file \
 rc=$?
 
 if [ ${rc} -eq 0 ]; then
-    cat <<"EOF"
+    cat <<EOF
 Code does not adhere to formatting standards.
-Please run the post-clone hook like so: `./hooks/post-clone`.
+${errorMessage}
 
 The following files are formatted improperly:
 EOF

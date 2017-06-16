@@ -1,21 +1,21 @@
 #!/usr/bin/env sh
 # Written by Eric Crosson
-# 2017-03-02
+# 2017-06-16
 #
 # Build the docker container provided by this project.
 
 set -o nounset
 [ "${CI_SERVER:-}" = "yes" ] && set -x
 
-root="$(readlink -f "$(dirname "$0")" | sed -r 's/\/bin.*//')"
-tag="$(cat "${root}/tag")"
+root="$(dirname "$0")/.."
+image="$(eval echo "$(cat tag)")"
 version="$(cat "${root}/version")"
 release_date="$(date +%Y-%m-%d:%H:%M)"
 
 cd "${root}" || exit -1
 
 docker build \
-       -t "${tag}:${version}" \
        --build-arg VERSION="${version}" \
        --build-arg RELEASE_DATE="${release_date}" \
+       -t "${image}:${version}" \
        .
