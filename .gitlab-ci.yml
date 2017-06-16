@@ -9,7 +9,7 @@ services:
 
 shellcheck:
   stage: lint
-  image: ecrosson/shellcheck
+  image: hamroctopus/shellcheck:1.0.0
   script:
     - shellcheck bin/*
 
