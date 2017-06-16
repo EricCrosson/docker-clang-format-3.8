@@ -21,5 +21,6 @@ ENTRYPOINT []
 ARG VERSION
 ARG RELEASE_DATE
 
-LABEL version="${VERSION}" \
+LABEL vendor="Eric Crosson" \
+version="${VERSION}" \
 release_date="${RELEASE_DATE}"
